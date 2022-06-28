@@ -1,0 +1,274 @@
+import random 
+
+twenty = int(input("Enter the number of twenty dollar bills: "))
+ten = int(input("Enter the number of ten dollar bills: "))
+five = int(input("Enter the number of five dollar bills: "))
+one = int(input("Enter the number of one dollar bills: "))
+silverDollar = int(input("Enter the number of silver dollars: "))
+fiftyCent = int(input("Enter the number of fifty cent pieces: "))
+quarters = int(input("Enter the number of quarters: "))
+dimes = int(input("Enter the number of dimes: "))
+nickels = int(input("Enter the number of nickels: "))
+pennies = int(input("Enter the number of pennies: "))
+
+total = (twenty * 20) + (ten * 10) + (five * 5) + (one * 1) + (silverDollar * 1) + (fiftyCent * 0.50) + (quarters * 0.25) + (dimes * .10) + (nickels * 0.05) + (pennies * 0.01)
+
+format_total = "{:.2f}".format(total)
+
+print("You have entered $" + str(format_total) + " into the vending machine")
+
+#function to randomize the amount of each item in the vending machine
+def randomize():
+  # Amount of each item in the vending machine
+  result = random.randint(0, 10)
+  return result
+
+#function to optimize change
+def makeChange(amount):
+  amount *= 100
+  
+  twenty = amount // 2000
+  amount -= twenty * 2000
+  twenty = int(twenty)
+
+  ten = amount // 1000
+  amount -= ten * 1000
+  ten = int(ten)
+  
+  five = amount // 500
+  amount -= five * 500
+  five = int(five)
+  
+  one = amount // 100
+  amount -= one * 100
+  one = int(one)
+  
+  fifty = amount // 50
+  amount -= fifty * 50
+  fifty = int(fifty)
+  
+  quarter = amount // 25
+  amount -= quarter * 25
+  quarter = int(quarter)
+  
+  dime = amount // 10
+  amount -= dime * 10
+  dime = int(dime)
+  
+  nickel = amount // 5
+  amount -= nickel * 5
+  nickel = int(nickel)
+  
+  penny = amount // 1
+  amount -= penny * 1
+  penny = int(penny)
+
+  return "$20 bills: " + str(twenty) + "\n" + "$10 bills: " + str(ten) + "\n" + "$5 bills: " + str(five) + "\n" + "$1 bills: " + str(one) + "\n" + "50 Cent Pieces: " + str(fifty) + "\n" + "Quarters: " + str(quarter) + "\n" + "Dimes: " + str(dime) + "\n" + "Nickels: " + str(nickel) + "\n" + "Pennies: " + str(penny)
+
+# Using the randomize function to stock the machine
+doritos_amt = randomize()
+chocolate_chip_cookies_amt = randomize()
+oreos_amt = randomize()
+granola_bar_amt = randomize()
+bubble_gum_amt = randomize()
+hersheys_bar_amt = randomize()
+m_and_ms_amt = randomize()
+gatorade_amt = randomize()
+water_amt = randomize()
+coca_cola_amt = randomize()
+
+#Function to print the vending machine interface
+def interface():
+  result = " "
+  print("----------------- VENDING MACHINE -----------------")
+  print("1      Doritos                   $1.00     " + str(doritos_amt) + " left")
+  print("2      Chocolate Chip Cookies    $1.00     " + str(chocolate_chip_cookies_amt) + " left")
+  print("3      Oreos                     $1.00     " + str(oreos_amt) + " left")
+  print("4      Granola Bar               $0.75     " + str(granola_bar_amt) + " left")
+  print("5      Bubble Gum                $0.50     " + str(bubble_gum_amt) + " left")
+  print("6      Hershey's Bar             $1.00     " + str(hersheys_bar_amt) + " left")
+  print("7      M & M's                   $1.00     " + str(m_and_ms_amt) + " left")
+  print("8      Gatorade                  $1.50     " + str(gatorade_amt) + " left")
+  print("9      Water                     $1.00     " + str(water_amt) + " left")
+  print("10     Coca-Cola                 $1.25     " + str(coca_cola_amt) + " left")
+  print("---------------------------------------------------")
+  return result
+
+# Price of each item in the vending machine
+doritos_price = 1.00
+chocolate_chip_cookies_price = 1.00
+oreos_price = 1.00
+granola_bar_price = 0.75
+bubble_gum_price = 0.50
+hersheys_bar_price = 1.00
+m_and_ms_price = 1.00
+gatorade_price = 1.50
+water_price = 1.00
+coca_cola_price = 1.25
+
+#Display the vending machine
+print(interface())
+
+#Ask the user how much money they are putting into the machine.
+money = total
+
+while True:
+  item = int(input("Please enter the number of the item you wish to purchase: "))
+  
+  if item == 1:
+    if money >= doritos_price and doritos_amt > 0:
+      doritos_amt -= 1
+      change = money - doritos_price
+    elif money >=doritos_price and doritos_amt == 0:
+      print("There are no doritos left! Select something else, please.")
+      item = int(input("Please enter the number of the item you wish to purchase: "))
+    else:
+      while money < doritos_price:
+        print("You do not have enough money to purchase that item.")
+        more_money = float(input("Please insert more money.  Enter the amount to add: $"))
+        money += more_money 
+      change = money - doritos_price
+  
+  if item == 2:
+    if money >= chocolate_chip_cookies_price and chocolate_chip_cookies_amt > 0:
+      chocolate_chip_cookies_amt -= 1
+      change = money - chocolate_chip_cookies_price
+    elif money >= chocolate_chip_cookies_price and chocolate_chip_cookies_amt == 0:
+      print("There are no chocolate chip cookies left! Select something else, please.")
+      item = int(input("Please enter the number of the item you wish to purchase: "))
+    else:
+      while money < chocolate_chip_cookies_price:
+        print("You do not have enough money to purchase that item.")
+        more_money = float(input("Please insert more money.  Enter the amount to add: $"))
+        money += more_money 
+      change = money - chocolate_chip_cookies_price
+  
+  if item == 3:
+    if money >= oreos_price and oreos_amt > 0:
+      oreos_amt -= 1
+      change = money - oreos_price
+    elif money >= oreos_price and oreos_amt == 0:
+      print("There are no oreos left! Select something else, please.")
+      item = int(input("Please enter the number of the item you wish to purchase: "))
+    else:
+      while money < oreos_price:
+        print("You do not have enough money to purchase that item.")
+        more_money = float(input("Please insert more money.  Enter the amount to add: $"))
+        money += more_money 
+      change = money - oreos_price
+  
+  if item == 4:
+    if money >= granola_bar_price and granola_bar_amt > 0:
+      granola_bar_amt -= 1
+      change = money - granola_bar_price
+    elif money >= granola_bar_price and granola_bar_amt == 0:
+      print("There are no granola bars left! Select something else, please.")
+      item = int(input("Please enter the number of the item you wish to purchase: "))
+    else:
+      while money < granola_bar_price:
+        print("You do not have enough money to purchase that item.")
+        more_money = float(input("Please insert more money.  Enter the amount to add: $"))
+        money += more_money 
+      change = money - granola_bar_price
+  
+  if item == 5:
+    if money >= bubble_gum_price and bubble_gum_amt > 0:
+      bubble_gum_amt -= 1
+      change = money - bubble_gum_price
+    elif money >= bubble_gum_price and bubble_gum_amt == 0:
+      print("There is no more bubble gum left! Select something else, please.")
+      item = int(input("Please enter the number of the item you wish to purchase: "))
+    else:
+      while money < bubble_gum_price:
+        print("You do not have enough money to purchase that item.")
+        more_money = float(input("Please insert more money.  Enter the amount to add: $"))
+        money += more_money 
+      change = money - bubble_gum_price
+  
+  if item == 6:
+    if money >= hersheys_bar_price and hersheys_bar_amt > 0:
+      hersheys_bar_amt -= 1
+      change = money - hersheys_bar_price
+    elif money >= hersheys_bar_price and hersheys_bar_amt == 0:
+      print("There are no more hershey's bars left! Select something else, please.")
+      item = int(input("Please enter the number of the item you wish to purchase: "))
+    else:
+      while money < hersheys_bar_price:
+        print("You do not have enough money to purchase that item.")
+        more_money = float(input("Please insert more money.  Enter the amount to add: $"))
+        money += more_money 
+      change = money - hersheys_bar_price
+  
+  if item == 7:
+    if money >= m_and_ms_price and m_and_ms_amt > 0:
+      m_and_ms_amt -= 1
+      change = money - m_and_ms_price
+    elif money >= m_and_ms_price and m_and_ms_amt == 0:
+      print("There are no M&M's left! Select something else, please.")
+      item = int(input("Please enter the number of the item you wish to purchase: "))
+    else:
+      while money < m_and_ms_price:
+        print("You do not have enough money to purchase that item.")
+        more_money = float(input("Please insert more money.  Enter the amount to add: $"))
+        money += more_money 
+      change = money - m_and_ms_price
+  
+  if item == 8:
+    if money >= gatorade_price and gatorade_amt >0:
+      gatorade_amt -= 1
+      change = money - gatorade_price
+    elif money >=gatorade_price and gatorade_amt ==0:
+      print("There is no gatorade left! Select something else, please.")
+      item = int(input("Please enter the number of the item you wish to purchase: "))
+    else:
+      while money < gatorade_price:
+        print("You do not have enough money to purchase that item.")
+        more_money = float(input("Please insert more money.  Enter the amount to add: $"))
+        money += more_money 
+      change = money - gatorade_price
+  
+  if item == 9:
+    if money >= water_price and water_amt >0:
+      water_amt -= 1
+      change = money - water_price
+    elif money >=water_price and water_amt ==0:
+      print("There is no water left! Select something else, please.")
+      item = int(input("Please enter the number of the item you wish to purchase: "))
+    else:
+      while money < water_price:
+        print("You do not have enough money to purchase that item.")
+        more_money = float(input("Please insert more money.  Enter the amount to add: $"))
+        money += more_money 
+      change = money - water_price
+  
+  if item == 10:
+    if money >= coca_cola_price and coca_cola_amt >0:
+      coca_cola_amt -= 1
+      change = money - coca_cola_price
+    elif money >=coca_cola_price and coca_cola_amt ==0:
+      print("There is no Coca Colas left! Select something else, please.")
+      item = int(input("Please enter the number of the item you wish to purchase: "))
+    else:
+      while money < coca_cola_price:
+        print("You do not have enough money to purchase that item.")
+        more_money = float(input("Please insert more money.  Enter the amount to add: $"))
+        money += more_money 
+      change = money - coca_cola_price
+  
+  print("Thank you for your purchase!")
+  print("")
+  more = input("Would you like to purchase anything else? (Yes/No): ")
+  
+  
+  if more == "No" or more == "no":
+    format_change = "{:.2f}".format(change)
+    print("Here is your change: $" + str(format_change))
+    format_change = float(format_change)
+    print(makeChange(format_change))
+    break
+  else:
+    money = change
+    # Vending Machine Interface
+    print(interface())
+    print("You currently have: $" + str(money))
+    
