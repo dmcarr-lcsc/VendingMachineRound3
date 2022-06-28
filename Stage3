@@ -26,6 +26,9 @@ def randomize():
 #function to optimize change
 def makeChange(amount):
   amount *= 100
+  amount = "{:.0f}".format(amount)
+
+  amount = int(amount)
   
   twenty = amount // 2000
   amount -= twenty * 2000
@@ -271,4 +274,3 @@ while True:
     # Vending Machine Interface
     print(interface())
     print("You currently have: $" + str(money))
-    
